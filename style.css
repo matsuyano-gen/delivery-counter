@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #222;
+}
+
+.app {
+  width: min(100% - 32px, 420px);
+  margin: 0 auto;
+  padding-top: 48px;
+  padding-bottom: 100px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+h1 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.date {
+  margin: 0 0 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  height: 64px;
+  padding: 0 16px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: white;
+  font-size: 28px;
+  text-align: right;
+}
+
+#saveButton,
+#saveSettingsButton {
+  width: 100%;
+  height: 60px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#saveButton:hover,
+#saveSettingsButton:hover {
+  opacity: 0.85;
+}
+
+.temporary-text {
+  margin-top: 40px;
+  text-align: center;
+  color: #777;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+
+  height: 70px;
+
+  background: white;
+  border-top: 1px solid #ccc;
+}
+
+.nav-button {
+  flex: 1;
+
+  border: 0;
+  background: white;
+
+  font-size: 16px;
+  color: #777;
+
+  cursor: pointer;
+}
+
+.nav-button.active {
+  font-weight: bold;
+  color: #000;
+  background: #e8e8e8;
+}
+
+.month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 32px 0 40px;
+}
+
+.month-selector button {
+  width: 56px;
+  height: 44px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: white;
+
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.month-selector button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.month-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.daily-section {
+  margin-top: 40px;
+}
+
+.daily-section h2 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.daily-record {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: white;
+  color: #222;
+
+  text-align: left;
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.daily-record:hover {
+  background: #eee;
+}
+
+.no-records {
+  color: #777;
+  text-align: center;
+}
+
+.settings-divider {
+  margin: 40px 0 24px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.backup-section h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+#exportBackupButton {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: white;
+  color: #222;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#exportBackupButton:hover {
+  background: #eee;
+}
+
+.backup-help {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+
+  border-radius: 8px;
+  background: #e9e9e9;
+
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#importBackupButton {
+  width: 100%;
+  height: 56px;
+  margin-top: 12px;
+
+  border: 1px solid #bbb;
+  border-radius: 10px;
+
+  background: white;
+  color: #222;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+#importBackupButton:hover {
+  background: #eee;
+}

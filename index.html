@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>配送記録</title>
+
+    <meta name="theme-color" content="#222222">
+
+    <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+    >
+
+    <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+    >
+
+    <meta
+    name="apple-mobile-web-app-title"
+    content="配送記録"
+    >
+
+    <link
+    rel="manifest"
+    href="manifest.json"
+    >
+
+    <link
+    rel="stylesheet"
+    href="style.css"
+    >
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+  <main class="app">
+
+    <section id="inputScreen" class="screen active">
+      <h1>配送記録</h1>
+
+      <p id="today" class="date"></p>
+
+      <div class="input-group">
+        <label for="takkyubin">宅急便</label>
+        <input
+          id="takkyubin"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          placeholder="0"
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="nekopos">ネコポス</label>
+        <input
+          id="nekopos"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          placeholder="0"
+        >
+      </div>
+
+      <button id="saveButton" type="button">
+        登録
+      </button>
+    </section>
+
+    <section id="summaryScreen" class="screen">
+    <h1>月別集計</h1>
+
+    <div class="month-selector">
+        <button id="prevMonthButton" type="button">
+        ＜
+        </button>
+
+        <div id="summaryMonth" class="month-title"></div>
+
+        <button id="nextMonthButton" type="button">
+        ＞
+        </button>
+    </div>
+
+    <div class="input-group">
+        <label>宅急便 合計</label>
+        <div id="takkyubinTotal">0 個</div>
+    </div>
+
+    <div class="input-group">
+        <label>ネコポス 合計</label>
+        <div id="nekoposTotal">0 個</div>
+    </div>
+
+    <div class="input-group">
+        <label>合計金額</label>
+        <div id="salesTotal">0 円</div>
+    </div>
+
+    <div class="daily-section">
+        <h2>日別記録</h2>
+
+        <div id="dailyRecords">
+        </div>
+    </div>
+
+    </section>
+
+    <section id="settingsScreen" class="screen">
+    <h1>設定</h1>
+
+    <div class="input-group">
+        <label for="takkyubinPrice">宅急便 単価</label>
+        <input
+        id="takkyubinPrice"
+        type="number"
+        inputmode="numeric"
+        min="0"
+        placeholder="0"
+        >
+    </div>
+
+    <div class="input-group">
+        <label for="nekoposPrice">ネコポス 単価</label>
+        <input
+        id="nekoposPrice"
+        type="number"
+        inputmode="numeric"
+        min="0"
+        placeholder="0"
+        >
+    </div>
+
+    <button id="saveSettingsButton" type="button">
+        設定を保存
+    </button>
+  
+    <hr class="settings-divider">
+
+    <div class="backup-section">
+      <h2>バックアップ</h2>
+
+      <p class="backup-help">
+        iPhoneでは、バックアップファイルは通常
+        「ファイル」アプリ内のダウンロード先に保存されます。
+        機種変更前などに保存しておいてください。
+      </p>
+
+      <button id="exportBackupButton" type="button">
+        バックアップを書き出す
+      </button>
+
+      <input
+        id="importBackupInput"
+        type="file"
+        accept=".json,application/json"
+        hidden
+      >
+
+      <button id="importBackupButton" type="button">
+        バックアップを読み込む
+      </button>
+    </div>
+    </section>
+
+  </main>
+
+
+  <nav class="bottom-nav">
+    <button
+      id="inputNav"
+      class="nav-button active"
+      type="button"
+    >
+      入力
+    </button>
+
+    <button
+      id="summaryNav"
+      class="nav-button"
+      type="button"
+    >
+      月別集計
+    </button>
+
+    <button
+      id="settingsNav"
+      class="nav-button"
+      type="button"
+    >
+      設定
+    </button>
+  </nav>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
