@@ -245,3 +245,52 @@ h1 {
 #importBackupButton:hover {
   background: #eee;
 }
+
+.past-entry-section {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.past-entry-section label {
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.past-entry-row {
+  display: flex;
+  gap: 10px;
+}
+
+#pastDateInput {
+  flex: 1;
+  height: 48px;
+
+  padding: 0 10px;
+
+  border: 1px solid #bbb;
+  border-radius: 8px;
+
+  background: white;
+
+  font-size: 16px;
+}
+
+#pastDateButton {
+  width: 90px;
+  height: 48px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #222;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
