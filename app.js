@@ -42,10 +42,24 @@ const exportBackupButton =
 const importBackupInput =
   document.getElementById("importBackupInput");
 
+const toast =
+  document.getElementById("toast");
+
 const inputNav = document.getElementById("inputNav");
 const summaryNav = document.getElementById("summaryNav");
 const settingsNav = document.getElementById("settingsNav");
 
+const dialogOverlay =
+  document.getElementById("dialogOverlay");
+
+const dialogMessage =
+  document.getElementById("dialogMessage");
+
+const dialogCancelButton =
+  document.getElementById("dialogCancelButton");
+
+const dialogOkButton =
+  document.getElementById("dialogOkButton");
 
 const now = new Date();
 
@@ -73,6 +87,66 @@ function getDateKey(date) {
 const todayKey = getDateKey(now);
 
 let selectedDateKey = todayKey;
+
+
+let toastTimer = null;
+
+function showToast(message) {
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  if (toastTimer) {
+    clearTimeout(toastTimer);
+  }
+
+  toastTimer = setTimeout(function () {
+    toast.classList.remove("show");
+  }, 1800);
+}
+
+
+function showConfirmDialog(message) {
+  return new Promise(function (resolve) {
+    dialogMessage.textContent = message;
+
+    dialogOverlay.classList.add("show");
+
+    function closeDialog(result) {
+      dialogOverlay.classList.remove("show");
+
+      dialogOkButton.removeEventListener(
+        "click",
+        onOk
+      );
+
+      dialogCancelButton.removeEventListener(
+        "click",
+        onCancel
+      );
+
+      resolve(result);
+    }
+
+    function onOk() {
+      closeDialog(true);
+    }
+
+    function onCancel() {
+      closeDialog(false);
+    }
+
+    dialogOkButton.addEventListener(
+      "click",
+      onOk
+    );
+
+    dialogCancelButton.addEventListener(
+      "click",
+      onCancel
+    );
+  });
+}
 
 
 function loadSelectedRecord() {
@@ -168,7 +242,7 @@ function saveSettings() {
     JSON.stringify(settings)
   );
 
-  alert("設定を保存しました");
+  showToast("✓ 設定を保存しました");
 }
 
 
@@ -230,7 +304,7 @@ function openBackupFilePicker() {
 }
 
 
-function importBackup(event) {
+async function importBackup(event) {
   const file = event.target.files[0];
 
   if (!file) {
@@ -239,7 +313,7 @@ function importBackup(event) {
 
   const reader = new FileReader();
 
-  reader.onload = function () {
+  reader.onload = async function () {
     try {
       const backupData =
         JSON.parse(reader.result);
@@ -256,9 +330,10 @@ function importBackup(event) {
         return;
       }
 
-      const confirmed = confirm(
-        "現在のデータをバックアップ内容で置き換えます。\nよろしいですか？"
-      );
+      const confirmed =
+        await showConfirmDialog(
+          "現在のデータをバックアップ内容で置き換えます。よろしいですか？"
+        );
 
       if (!confirmed) {
         return;
@@ -280,9 +355,7 @@ function importBackup(event) {
       loadSelectedRecord();
       updateMonthlySummary();
 
-      alert(
-        "バックアップを復元しました"
-      );
+      showToast("✓ バックアップを復元しました");
 
       showScreen("input");
 
@@ -483,7 +556,7 @@ function updateMonthButtons(records) {
 }
 
 
-function saveTodayRecord() {
+async function saveTodayRecord() {
   const takkyubinText = takkyubinInput.value.trim();
   const nekoposText = nekoposInput.value.trim();
 
@@ -509,9 +582,10 @@ function saveTodayRecord() {
   }
 
   if (takkyubin > 1000 || nekopos > 1000) {
-    const result = confirm(
-      "1000個を超える数字が入力されています。\nこのまま登録しますか？"
-    );
+    const result =
+      await showConfirmDialog(
+        "1000個を超える数字が入力されています。このまま登録しますか？"
+      );
 
     if (!result) {
       return;
@@ -589,9 +663,9 @@ function saveTodayRecord() {
   );
 
   if (selectedDateKey === todayKey) {
-    alert("登録しました");
+    showToast("✓ 登録しました");
   } else {
-    alert("更新しました");
+    showToast("✓ 更新しました");
   }
 
   loadSelectedRecord();

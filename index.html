@@ -220,7 +220,24 @@
     </button>
   </nav>
 
+<div id="dialogOverlay" class="dialog-overlay">
+  <div class="dialog-box">
+    <p id="dialogMessage" class="dialog-message"></p>
 
-  <script src="app.js"></script>
+    <div class="dialog-buttons">
+      <button id="dialogCancelButton" type="button">
+        キャンセル
+      </button>
+
+      <button id="dialogOkButton" type="button">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
 </body>
 </html>
