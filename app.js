@@ -184,12 +184,12 @@ function openPastDateEntry() {
     pastDateInput.value;
 
   if (!selectedDate) {
-    alert("日付を選択してください");
+    showToast("日付を選択してください");
     return;
   }
 
   if (selectedDate > todayKey) {
-    alert("未来の日付は登録できません");
+    showToast("未来の日付は登録できません");
     return;
   }
 
@@ -324,7 +324,7 @@ async function importBackup(event) {
         typeof backupData.settings !== "object" ||
         typeof backupData.records !== "object"
       ) {
-        alert(
+        showToast(
           "このファイルは有効なバックアップではありません"
         );
         return;
@@ -360,7 +360,7 @@ async function importBackup(event) {
       showScreen("input");
 
     } catch (error) {
-      alert(
+      showToast(
         "バックアップファイルを読み込めませんでした"
       );
 
@@ -487,6 +487,9 @@ function updateDailyRecords(monthlyRecords) {
     button.textContent =
       `${day}日　宅急便 ${takkyubin}　ネコポス ${nekopos}`;
 
+    if (takkyubin === 0 && nekopos === 0) {
+      button.classList.add("zero-record");
+    }
 
     button.addEventListener(
       "click",
@@ -561,7 +564,7 @@ async function saveTodayRecord() {
   const nekoposText = nekoposInput.value.trim();
 
   if (takkyubinText === "" || nekoposText === "") {
-    alert("宅急便とネコポスの両方を入力してください");
+    showToast("宅急便とネコポスの両方を入力してください");
     return;
   }
 
@@ -572,12 +575,12 @@ async function saveTodayRecord() {
     !Number.isInteger(takkyubin) ||
     !Number.isInteger(nekopos)
   ) {
-    alert("配送個数は整数で入力してください");
+    showToast("配送個数は整数で入力してください");
     return;
   }
 
   if (takkyubin < 0 || nekopos < 0) {
-    alert("配送個数にマイナスは入力できません");
+    showToast("配送個数にマイナスは入力できません");
     return;
   }
 
@@ -618,7 +621,7 @@ async function saveTodayRecord() {
       localStorage.getItem("deliverySettings");
 
     if (!savedSettings) {
-      alert(
+      showToast(
         "単価が設定されていません。\n先に設定画面で単価を登録してください。"
       );
 
@@ -641,7 +644,7 @@ async function saveTodayRecord() {
       takkyubinPrice <= 0 ||
       nekoposPrice <= 0
     ) {
-      alert(
+      showToast(
         "単価が正しく設定されていません。\n先に設定画面で単価を登録してください。"
       );
 

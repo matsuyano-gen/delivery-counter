@@ -399,3 +399,9 @@ h1 {
   background: #222;
   color: white;
 }
+
+.daily-record.zero-record {
+  color: #b00000;
+  background: #ffeaea;
+  border-color: #e0aaaa;
+}
