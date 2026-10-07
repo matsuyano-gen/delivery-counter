@@ -17,6 +17,12 @@ const salesTotal = document.getElementById("salesTotal");
 const dailyRecords =
   document.getElementById("dailyRecords");
 
+const pastDateInput =
+  document.getElementById("pastDateInput");
+
+const pastDateButton =
+  document.getElementById("pastDateButton");
+
 const prevMonthButton =
   document.getElementById("prevMonthButton");
 
@@ -99,6 +105,26 @@ function loadSelectedRecord() {
   updateInputDate();
 }
 
+function openPastDateEntry() {
+  const selectedDate =
+    pastDateInput.value;
+
+  if (!selectedDate) {
+    alert("日付を選択してください");
+    return;
+  }
+
+  if (selectedDate > todayKey) {
+    alert("未来の日付は登録できません");
+    return;
+  }
+
+  selectedDateKey = selectedDate;
+
+  loadSelectedRecord();
+
+  showScreen("input");
+}
 
 function updateInputDate() {
   const parts = selectedDateKey.split("-");
@@ -619,6 +645,11 @@ importBackupInput.addEventListener(
   importBackup
 );
 
+pastDateButton.addEventListener(
+  "click",
+  openPastDateEntry
+);
+
 prevMonthButton.addEventListener("click", function () {
   changeMonth(-1);
 });
@@ -645,6 +676,7 @@ settingsNav.addEventListener("click", function () {
   showScreen("settings");
 });
 
+pastDateInput.max = todayKey;
 
 loadSelectedRecord();
 loadSettings();
