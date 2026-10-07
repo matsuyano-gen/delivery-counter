@@ -517,15 +517,36 @@ function saveTodayRecord() {
     const savedSettings =
       localStorage.getItem("deliverySettings");
 
-    if (savedSettings) {
-      const settings =
-        JSON.parse(savedSettings);
+    if (!savedSettings) {
+      alert(
+        "単価が設定されていません。\n先に設定画面で単価を登録してください。"
+      );
 
-      takkyubinPrice =
-        Number(settings.takkyubinPrice || 0);
+      showScreen("settings");
+      return;
+    }
 
-      nekoposPrice =
-        Number(settings.nekoposPrice || 0);
+    const settings =
+      JSON.parse(savedSettings);
+
+    takkyubinPrice =
+      Number(settings.takkyubinPrice);
+
+    nekoposPrice =
+      Number(settings.nekoposPrice);
+
+    if (
+      !Number.isFinite(takkyubinPrice) ||
+      !Number.isFinite(nekoposPrice) ||
+      takkyubinPrice <= 0 ||
+      nekoposPrice <= 0
+    ) {
+      alert(
+        "単価が正しく設定されていません。\n先に設定画面で単価を登録してください。"
+      );
+
+      showScreen("settings");
+      return;
     }
   }
 
